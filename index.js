@@ -2,7 +2,7 @@ const axios = require("axios");
 
 const pingSpringBoot = async () => {
   try {
-    await axios.get("https://sonic-learning.onrender.com/api/v1/health");
+    await axios.get("https://sonic.sdklearningboost.io.vn/api/v1/health");
     console.log("Pinged Spring Boot successfully!");
   } catch (error) {
     console.error("Failed to ping Spring Boot:", error.message);
@@ -23,4 +23,4 @@ const main = async () => {
   await pingCronB(); // Sau khi ping Spring Boot xong, mới ping Cron Job B
 };
 
-setInterval(main, 30000); // Gọi mỗi 30 giây
+setInterval(main, 60000); // Gọi mỗi 30 giây

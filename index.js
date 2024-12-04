@@ -13,4 +13,4 @@ const main = async () => {
   await pingSpringBoot();
 };
 
-setInterval(main, 60000);
+setInterval(main, 120000);

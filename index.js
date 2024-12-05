@@ -34,6 +34,21 @@ const pingCronB = async () => {
   }
 };
 
+// API để ping Next.js
+const pingNextJs = async () => {
+  try {
+    await axios.get(process.env.NEXTJS_API_HEALTH_URL);
+    console.log(
+      `[${new Date().toISOString()}] Pinged Next.js API successfully!`
+    );
+  } catch (error) {
+    console.error(
+      `[${new Date().toISOString()}] Failed to ping Next.js API:`,
+      error.message
+    );
+  }
+};
+
 // Cài đặt cron job để ping Spring Boot mỗi 2 phút
 cron.schedule("*/2 * * * *", async () => {
   console.log(
@@ -48,6 +63,14 @@ cron.schedule("*/4 * * * *", async () => {
     `[${new Date().toISOString()}] Running cron job to ping Cron B...`
   );
   await pingCronB();
+});
+
+// Cài đặt cron job để gọi Next.js mỗi 5 phút
+cron.schedule("*/5 * * * *", async () => {
+  console.log(
+    `[${new Date().toISOString()}] Running cron job to ping Next.js API...`
+  );
+  await pingNextJs();
 });
 
 // Route để nhận yêu cầu từ Cron B

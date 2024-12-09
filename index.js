@@ -57,21 +57,23 @@ cron.schedule("*/2 * * * *", async () => {
   await pingSpringBoot();
 });
 
-// Cài đặt cron job để gọi Cron B mỗi 4 phút
-cron.schedule("*/4 * * * *", async () => {
-  console.log(
-    `[${new Date().toISOString()}] Running cron job to ping Cron B...`
-  );
-  await pingCronB();
-});
-
 // Cài đặt cron job để gọi Next.js mỗi 5 phút
-cron.schedule("*/5 * * * *", async () => {
+cron.schedule("*/2 * * * *", async () => {
   console.log(
     `[${new Date().toISOString()}] Running cron job to ping Next.js API...`
   );
   await pingNextJs();
 });
+
+// Cron job 3: Ping Cron B mỗi 2 phút (bắt đầu sau 20 giây)
+setTimeout(() => {
+  cron.schedule("*/2 * * * *", async () => {
+    console.log(
+      `[${new Date().toISOString()}] Running cron job to ping Cron B...`
+    );
+    await pingCronB();
+  });
+}, 20 * 1000); // 20 giây
 
 // Route để nhận yêu cầu từ Cron B
 app.get("/ping-from-cronb", async (req, res) => {

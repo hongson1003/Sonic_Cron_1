@@ -49,25 +49,25 @@ const pingNextJs = async () => {
   }
 };
 
-// Cài đặt cron job để ping Spring Boot mỗi 2 phút
-cron.schedule("*/2 * * * *", async () => {
+// Cài đặt cron job để ping Spring Boot mỗi phút
+cron.schedule("* * * * *", async () => {
   console.log(
     `[${new Date().toISOString()}] Running cron job to ping Spring Boot...`
   );
   await pingSpringBoot();
 });
 
-// Cài đặt cron job để gọi Next.js mỗi 5 phút
-cron.schedule("*/2 * * * *", async () => {
+// Cài đặt cron job để gọi Next.js mỗi phút
+cron.schedule("* * * * *", async () => {
   console.log(
     `[${new Date().toISOString()}] Running cron job to ping Next.js API...`
   );
   await pingNextJs();
 });
 
-// Cron job 3: Ping Cron B mỗi 2 phút (bắt đầu sau 20 giây)
+// Cron job 3: Ping Cron B mỗi phút (bắt đầu sau 20 giây)
 setTimeout(() => {
-  cron.schedule("*/2 * * * *", async () => {
+  cron.schedule("* * * * *", async () => {
     console.log(
       `[${new Date().toISOString()}] Running cron job to ping Cron B...`
     );

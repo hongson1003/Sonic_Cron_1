@@ -10,12 +10,10 @@ const PORT = process.env.PORT || 3000;
 const pingSpringBoot = async () => {
   try {
     await axios.get(process.env.SPRING_BOOT_HEALTH_URL);
-    console.log(
-      `[${new Date().toISOString()}] Pinged Spring Boot successfully!`
-    );
+    console.log(`[${new Date().toString()}] Pinged Spring Boot successfully!`);
   } catch (error) {
     console.error(
-      `[${new Date().toISOString()}] Failed to ping Spring Boot:`,
+      `[${new Date().toString()}] Failed to ping Spring Boot:`,
       error.message
     );
   }
@@ -25,10 +23,10 @@ const pingSpringBoot = async () => {
 const pingCronB = async () => {
   try {
     await axios.get(process.env.CRON_B_URL);
-    console.log(`[${new Date().toISOString()}] Pinged Cron B successfully!`);
+    console.log(`[${new Date().toString()}] Pinged Cron B successfully!`);
   } catch (error) {
     console.error(
-      `[${new Date().toISOString()}] Failed to ping Cron B:`,
+      `[${new Date().toString()}] Failed to ping Cron B:`,
       error.message
     );
   }
@@ -38,12 +36,10 @@ const pingCronB = async () => {
 const pingNextJs = async () => {
   try {
     await axios.get(process.env.NEXTJS_API_HEALTH_URL);
-    console.log(
-      `[${new Date().toISOString()}] Pinged Next.js API successfully!`
-    );
+    console.log(`[${new Date().toString()}] Pinged Next.js API successfully!`);
   } catch (error) {
     console.error(
-      `[${new Date().toISOString()}] Failed to ping Next.js API:`,
+      `[${new Date().toString()}] Failed to ping Next.js API:`,
       error.message
     );
   }
@@ -52,7 +48,7 @@ const pingNextJs = async () => {
 // Cài đặt cron job để ping Spring Boot mỗi phút
 cron.schedule("* * * * *", async () => {
   console.log(
-    `[${new Date().toISOString()}] Running cron job to ping Spring Boot...`
+    `[${new Date().toString()}] Running cron job to ping Spring Boot...`
   );
   await pingSpringBoot();
 });
@@ -60,7 +56,7 @@ cron.schedule("* * * * *", async () => {
 // Cài đặt cron job để gọi Next.js mỗi phút
 cron.schedule("* * * * *", async () => {
   console.log(
-    `[${new Date().toISOString()}] Running cron job to ping Next.js API...`
+    `[${new Date().toString()}] Running cron job to ping Next.js API...`
   );
   await pingNextJs();
 });
@@ -69,7 +65,7 @@ cron.schedule("* * * * *", async () => {
 setTimeout(() => {
   cron.schedule("* * * * *", async () => {
     console.log(
-      `[${new Date().toISOString()}] Running cron job to ping Cron B...`
+      `[${new Date().toString()}] Running cron job to ping Cron B...`
     );
     await pingCronB();
   });
@@ -78,7 +74,7 @@ setTimeout(() => {
 // Route để nhận yêu cầu từ Cron B
 app.get("/ping-from-cronb", async (req, res) => {
   console.log(
-    `[${new Date().toISOString()}] Received ping from Cron B, calling Spring Boot...`
+    `[${new Date().toString()}] Received ping from Cron B, calling Spring Boot...`
   );
   try {
     await pingSpringBoot();

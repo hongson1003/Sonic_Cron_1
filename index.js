@@ -72,7 +72,7 @@ setTimeout(() => {
 }, 20 * 1000); // 20 giây
 
 // Route để nhận yêu cầu từ Cron B
-app.get("/ping-from-cronb", async (req, res) => {
+app.get("/", async (req, res) => {
   console.log(
     `[${new Date().toString()}] Received ping from Cron B, calling Spring Boot...`
   );
